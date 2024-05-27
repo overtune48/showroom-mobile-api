@@ -40,7 +40,7 @@ const Rooms = {
       // Find Member Live
       for (let i = 0; i < data.length; i++) {
         const index = data[i];
-        if (index.genre_name === "Idol") {
+        if (index.genre_name === "Idol" || index.genre_name === "Popularity" ) {
           onLive.push(index);
         }
       }
