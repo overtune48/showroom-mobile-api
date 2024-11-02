@@ -2,16 +2,6 @@ const getCustomRoom = (type) => {
   let rooms;
   if (type === "trainee") {
     rooms = {
-      alya: "461451",
-      anin: "461452",
-      cathcy: "461454",
-      chelsea: "461458",
-      cynthia: "461463",
-      elin: "461475",
-      danella: "461466",
-      daisy: "461465",
-      gendis: "461476",
-      michie: "461481",
       abigail_rachel: "509985",
       adeline_wijaya: "509992",
       aurhel_alana: "509997",
@@ -40,6 +30,16 @@ const getCustomRoom = (type) => {
       raisha: "400718",
       gracie: "461478",
       greseel: "461479",
+      alya: "461451",
+      anin: "461452",
+      cathcy: "461454",
+      chelsea: "461458",
+      cynthia: "461463",
+      elin: "461475",
+      danella: "461466",
+      daisy: "461465",
+      gendis: "461476",
+      michie: "461481",
     };
   }
 
