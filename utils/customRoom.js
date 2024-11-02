@@ -14,7 +14,6 @@ const getCustomRoom = (type) => {
       michie: "461481",
       abigail_rachel: "509985",
       adeline_wijaya: "509992",
-      aisa_maharani_napitupulu: "509995",
       aurhel_alana: "509997",
       catherina_vallencia: "510000",
       fritzy_rosmerian: "510011",
