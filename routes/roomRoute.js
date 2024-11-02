@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get("/", Rooms.getRoomList);
 router.get("/onlives", Rooms.getRoomLive);
+router.get("/premium-live", Rooms.getPremiumLive);
 router.get("/profile/:roomId/:cookies", Rooms.getProfile);
 router.get("/schedule/:roomId", Rooms.getNextLive);
 router.get("/total-rank/:roomId", Rooms.getTotalRank);

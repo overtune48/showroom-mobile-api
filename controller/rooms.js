@@ -13,10 +13,8 @@ const Rooms = {
         const index = rooms[i];
         if (
           index.name.includes("JKT48") &&
-          !index.url_key.includes("JKT48_Eve") &&
-          !index.url_key.includes("JKT48_Ariel") &&
-          !index.url_key.includes("JKT48_Anin") &&
-          !index.url_key.includes("JKT48_Cindy")
+          !index.url_key.includes("JKT48_Zee") &&
+          !index.url_key.includes("JKT48_Adel")
         ) {
           roomList.push(index);
         }
@@ -32,7 +30,6 @@ const Rooms = {
     try {
       let onLive = [];
       let roomIsLive = [];
-      let findSisca = [];
 
       const response = await fetchService(`${LIVE}/onlives`, res);
       const data = response.data.onlives;
@@ -40,7 +37,7 @@ const Rooms = {
       // Find Member Live
       for (let i = 0; i < data.length; i++) {
         const index = data[i];
-        if (index.genre_name === "Idol" || index.genre_name === "Popularity" ) {
+        if (index.genre_name === "Idol" || index.genre_name === "Popularity") {
           onLive.push(index);
         }
       }
@@ -49,25 +46,51 @@ const Rooms = {
         const roomLive = onLive[0].lives;
 
         roomLive.forEach((item) => {
-          if (item.room_url_key.includes("JKT48")) {
+          if (
+            item.room_url_key.includes("JKT48") &&
+            !item.room_url_key.includes("officialJKT48")
+          ) {
             roomIsLive.push(item);
           }
         });
       }
 
-      // Find Sisca
-      for (let i = 0; i < data.length; i++) {
-        const index = data[i];
-        if (index.genre_name === "Music") {
-          findSisca.push(index);
-        }
+      if (roomIsLive.length === 0) {
+        res.send({
+          message: "Room Not Live",
+          is_live: false,
+          data: []
+        });
       }
 
-      if (findSisca.length) {
-        const siscaLive = findSisca[0].lives;
+      res.send({
+        message: "Room Is Live",
+        is_live: true,
+        data: roomIsLive
+      });
+    } catch (error) {
+      return error;
+    }
+  },
 
-        siscaLive.forEach((item) => {
-          if (item.room_url_key.includes("JKT48")) {
+  getPremiumLive: async (req, res) => {
+    try {
+      let onLive = [];
+      let roomIsLive = [];
+
+      const response = await fetchService(`${LIVE}/onlives`, res);
+      const data = response.data.onlives;
+
+      for (let i = 0; i < data.length; i++) {
+        const index = data[i];
+        onLive.push(index);
+      }
+
+      if (onLive.length) {
+        const roomLive = onLive[0].lives;
+
+        roomLive.forEach((item) => {
+          if (item.room_url_key === "officialJKT48") {
             roomIsLive.push(item);
           }
         });
@@ -143,7 +166,7 @@ const Rooms = {
   },
 
   getGen10Member: async (req, res) => {
-    const ROOMS = getCustomRoom('gen_10')
+    const ROOMS = getCustomRoom("gen_10");
     const promises = Object.values(ROOMS).map(async (room_id) => {
       const response = await fetchService(
         `${ROOM}/profile?room_id=${room_id}`,
@@ -161,7 +184,7 @@ const Rooms = {
   },
 
   getTrainee: async (req, res) => {
-    const ROOMS = getCustomRoom('trainee')
+    const ROOMS = getCustomRoom("trainee");
     const promises = Object.values(ROOMS).map(async (room_id) => {
       const response = await fetchService(
         `${ROOM}/profile?room_id=${room_id}`,
