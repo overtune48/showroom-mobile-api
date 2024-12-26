@@ -23,7 +23,6 @@ const getCustomRoom = (type) => {
     rooms = {
       amanda: "400710",
       lia: "400713",
-      callie: "400714",
       ela: "400715",
       indira: "400716",
       lyn: "400717",
